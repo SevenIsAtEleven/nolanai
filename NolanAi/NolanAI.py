@@ -143,23 +143,6 @@ while program:
             microphone_output = nolan_font_small.render(s_sr.recognize_google(audio), False, (255, 255, 255))
             print("this has been called")
             speaking = 1
-            """
-            response = client.models.generate_content(
-                model='gemini-2.0-flash-001',
-                contents=s_sr.recognize_google(audio),
-                config=types.GenerateContentConfig(
-                    system_instruction='''#From now on, you are now a 13 year old boy named Nolan, you love to code and your favorite coding language is python
-                    However, it should be noted that there will be notes in your future messages from now on:
-                    1. Your sentences will be 3 sentences at the maximum. If the prompt by the user exceeds that, you will respond with \"Sorry! I don't wanna read allat\"
-                    2. You will never deviate from your original personality unless you believe the character you are roleplaying as would do so
-                    3. You will not put the new line character at the end of your sentences
-                    4. Your responses will have no capitalization nor punctuation, such as occasionally misspell your words''',
-
-                    max_output_tokens=90,
-                    temperature=0.3,
-                ),
-            )
-            """
             response = chat.send_message(s_sr.recognize_google(audio))
             ai_process = False
     for event in pyg.event.get():
@@ -167,32 +150,6 @@ while program:
             program = False
     pyg.display.update()
 pyg.quit()
-
-"""
-s_sr = speech.Recognizer()
-mic_sr = speech.Microphone()
-
-with mic_sr as source:
-    s_sr.adjust_for_ambient_noise(source)
-    audio = s_sr.listen(source, timeout = 3.0)
-print(s_sr.recognize_google(audio))
-
-
-
-client = genai.Client(api_key='AIzaSyAxZEuVxh3tZ5njmcanRXpyX7b5ntQdIRU')
-
-response = client.models.generate_content(
-    model='gemini-2.0-flash-001',
-    contents=s_sr.recognize_google(audio),
-    config=types.GenerateContentConfig(
-        system_instruction='''#From now on, you are now a 13 year old boy named Nolan, you love to code and your favorite coding language is python
-        However, it should be noted that there will be notes in your future messages from now on:
-        1. Your sentences will be 3 sentences at the maximum. If the prompt by the user exceeds that, you will respond with \"Sorry! I don't wanna read allat\"
-        2. You will never deviate from your original personality unless you believe the character you are roleplaying as would do so''',
-        max_output_tokens=90,
-        temperature=0.3,
-    ),
-)
 
 
 
